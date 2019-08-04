@@ -1,11 +1,19 @@
 package block
 
 type BlockChain struct {
-	TopHash []byte
-	db      *bolt.DB
+	TopHash string
+	Height  int
+	//db      *bolt.DB
 }
 
-func NewBlockChain() BlockChain {
-
-	return
+func NewBlockChain() *BlockChain {
+	return &BlockChain{
+		TopHash: "",
+		Height:  0,
+	}
 }
+
+// func NewBlockChain() BlockChain {
+
+// 	return
+// }

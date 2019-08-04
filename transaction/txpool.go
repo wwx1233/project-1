@@ -1,6 +1,8 @@
 package transaction
 
-import "sync"
+import (
+	"sync"
+)
 
 type TxPool struct {
 	M   map[string]struct{}
@@ -8,27 +10,30 @@ type TxPool struct {
 	Mtx sync.Mutex
 }
 
-// CheckBlock 检查是否满足打包条件
-func CheckBlock() {
-
+// NewTxPool 初始化一个交易池
+func NewTxPool() *TxPool {
+	return &TxPool{
+		M:  make(map[string]struct{}),
+		Tx: make([]*Transaction, 0),
+	}
 }
 
-// FindTx 找放进区块的交易
-func FindTx() []Transaction {
-	Mtx.Lock()
-	defer Mtx.Unlock()
-	txs := Tx[:4]
-	Tx = Tx[4:]
-	for _,v := txs {
-		delete(M, v)
+// PutTx 存入一个交易
+func (tp *TxPool) PutTx(tx *Transaction) {
+	tp.Mtx.Lock()
+	defer tp.Mtx.Unlock()
+	tp.Tx = append(tp.Tx, tx)
+	tp.M[tx.Thash] = struct{}{}
+}
+
+//FindTx 找放进区块的交易
+func (tp *TxPool) FindTx() []*Transaction {
+	tp.Mtx.Lock()
+	defer tp.Mtx.Unlock()
+	txs := tp.Tx[:4]
+	tp.Tx = tp.Tx[4:]
+	for _, v := range txs {
+		delete(tp.M, v.Thash)
 	}
 	return txs
-}
-
-func PutTx(tx *Transaction) {
-	agent.TxPool.Mtx.Lock()
-	defer agent.TxPool.Mtx.Unlock()
-	Tx = append(Tx, tx)
-	hash := hash(tx)
-	M[] = struct{}
 }

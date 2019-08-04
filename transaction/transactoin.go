@@ -1,41 +1,54 @@
 package transaction
 
-import "github.com/LazyboyChen7/project/agent"
+import (
+	"bytes"
+
+	"github.com/LazyboyChen7/project/utils"
+)
 
 type Transaction struct {
-	Data string // 物品元信息
 	// CreateInstance []byte // 物品初始归属
 	// Case []int // 案件信息
-	Vin  []byte // 流转输出方
-	Vout []byte // 流传输入方
+	Data  string // 物品元信息
+	Vin   string // 流转输出方
+	Vout  string // 流传输入方
+	Thash string
 }
 
 // CreateTx 创建交易
-func (a *agent.Agent) CreateTx(data string, addr []byte) *Transaction {
+func CreateTx(data string, from, to string) *Transaction {
 	return &Transaction{
 		Data: data,
-		Vin:  a.Wlt.Address,
-		Vout: addr,
+		Vin:  from,
+		Vout: to,
 	}
 }
 
 // Verify 验证交易
 func VerifyTx(tx *Transaction) bool {
 	// 1，验证交易
-	vin := tx.Vin
-	vout := tx.Vout
-	data := tx.Data
-	if vin == "" {
+	if tx.Vin == "" {
 		//data => vout
 		return true
 	} else {
 		// 查数据库
-		if vin have data {
-			vin delete data
-			vout put data
-			return true
-		} else {
-			return false
-		}
+		// if vin have data {
+		// 	vin delete data
+		// 	vout put data
+		// 	return true
+		// } else {
+		// 	return false
+		// }
 	}
+
+	return true
+}
+
+func Txhash(t *Transaction) string {
+	var bf bytes.Buffer
+	bf.WriteString(t.Data)
+	bf.WriteString(t.Vin)
+	bf.WriteString(t.Vout)
+	bt := bf.Bytes()
+	return utils.Hash(bt)
 }

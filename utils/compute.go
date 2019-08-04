@@ -1,20 +1,10 @@
 package utils
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"strconv"
 )
-
-func GetBlockHash(prehash, root []byte, tmp int64, height int) string {
-	var buf bytes.Buffer
-	buf.Write(prehash)
-	buf.Write(root)
-	buf.Write(Int64ToByte(tmp))
-	buf.Write(IntToByte(height))
-	return Hash(buf.Bytes())
-}
 
 func IntToByte(num int) []byte {
 	return []byte(strconv.Itoa(num))
