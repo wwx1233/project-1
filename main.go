@@ -2,16 +2,15 @@ package main
 
 import (
 	"fmt"
-	"project/wallet"
+
+	"github.com/LazyboyChen7/project/agent"
 )
 
-var MyWallet *wallet.Wallet
+var AgentCtrl agent.Agent
 
 func main() {
-	MyWallet := wallet.NewWallet()
-	//server := Newserver()
-	fmt.Println(MyWallet)
+	Log.Println("Process Start...")
 
-	// cli.Cli{}
-	// cli.Run()
+	s := "hello world."
+	fmt.Println(s)
 }

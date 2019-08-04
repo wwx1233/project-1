@@ -9,6 +9,7 @@ import (
 type Wallet struct {
 	PrivateKey *ecdsa.PrivateKey
 	PublicKey  []byte
+	Address    []byte
 }
 
 // 生成钱包

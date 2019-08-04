@@ -1,8 +1,7 @@
 package server
 
 import (
-	"log"
-	"project/wallet"
+	"github.com/LazyboyChen7/project/utils"
 )
 
 type IdenMsg struct {
@@ -11,8 +10,7 @@ type IdenMsg struct {
 }
 
 type Server struct {
-	address string
-	Wallet  wallet.Wallet
+	port    string
 	IdenSet map[string]IdenMsg
 }
 
@@ -21,13 +19,9 @@ const (
 )
 
 func NewServer() *Server {
-	MyWallet, MyAddr, err := wallet.NewWallet()
-	if err != nil {
-		log.Fatal(err)
-	}
+	port := utils.GetValidPort()
 	return &Server{
-		address: MyAddr,
-		Wallet:  MyWallet,
+		port:    port,
 		IdenSet: make(map[string]IdenMsg),
 	}
 }

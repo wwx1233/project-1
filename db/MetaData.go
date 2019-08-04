@@ -11,5 +11,5 @@ type CreateMeta interface{}
 
 func NewMetaDate(name, region, lawcase []byte, createdtime int64) *Meta {
 
-	return
+	return nil
 }
