@@ -11,6 +11,7 @@ func main() {
 	ag, err := agent.NewAgent()
 	if err != nil {
 		log.Println("create agent wrong...", err)
+		return
 	}
 	log.Println("The wallet private key  is ", ag.Wlt.PrivateKey.D)
 	log.Println("The wallet public key x is ", ag.Wlt.PrivateKey.PublicKey.X)
@@ -19,5 +20,4 @@ func main() {
 	log.Println("The blockchain height is ", ag.Blc.Bc.Height)
 	log.Println("The blockchain top hash is ", ag.Blc.Bc.TopHash)
 
-	log.Println("Process end.")
 }
