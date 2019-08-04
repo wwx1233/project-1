@@ -22,16 +22,7 @@ func NewBlockCtrl() *BlockCtrl {
 
 // CheckBlock 检查是否满足打包条件
 func (bc *BlockCtrl) CheckBlock() {
-	// t := time.NewTicker(time.Second)
-	// for {
-	// 	select {
-	// 	case <-t.C:
-	// 		bc.CreateBlock()
-	// 	case len(bc.Tx.Tx) > 3:
-	// 		bc.CreateBlock()
-	// 	default:
-	// 	}
-	// }
+
 }
 
 // CreateBlock 产生区块
