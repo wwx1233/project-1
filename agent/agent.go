@@ -16,7 +16,7 @@ type Agent struct {
 }
 
 // NewAgent 初始化Agent
-func NewAgent() (*Agent, error) {
+func NewAgent(port string) (*Agent, error) {
 	log.Println("Create new Agent now")
 	wlt, err := wallet.NewWallet()
 	if err != nil {
@@ -24,7 +24,7 @@ func NewAgent() (*Agent, error) {
 		return nil, err
 	}
 	log.Println("-- Craete new wallet Success!")
-	svr, err := server.NewServer()
+	svr, err := server.NewServer(port)
 	if err != nil {
 		log.Println("-- Craete new server wrong:  ", err)
 		return nil, err
@@ -42,4 +42,9 @@ func NewAgent() (*Agent, error) {
 		Svr: svr,
 		Blc: blc,
 	}, nil
+}
+
+func (agent *Agent) Start() {
+	log.Printf("agent start...\n\n")
+
 }

@@ -14,8 +14,7 @@ const (
 	SuperNode = ":9999"
 )
 
-func NewServer() (*Server, error) {
-	port := "8080"
+func NewServer(port string) (*Server, error) {
 	return &Server{
 		Port:    port,
 		IdenSet: make(map[string]IdenMsg),

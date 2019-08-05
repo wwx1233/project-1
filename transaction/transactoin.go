@@ -16,11 +16,12 @@ type Transaction struct {
 }
 
 // CreateTx 创建交易
-func CreateTx(data string, from, to string) *Transaction {
-	return &Transaction{
-		Data: data,
-		Vin:  from,
-		Vout: to,
+func CreateTx(data string, from, to string) Transaction {
+	return Transaction{
+		Data:  data,
+		Vin:   from,
+		Vout:  to,
+		Thash: Txhash(data, from, to),
 	}
 }
 
@@ -44,11 +45,11 @@ func VerifyTx(tx *Transaction) bool {
 	return true
 }
 
-func Txhash(t *Transaction) string {
+func Txhash(d, f, t string) string {
 	var bf bytes.Buffer
-	bf.WriteString(t.Data)
-	bf.WriteString(t.Vin)
-	bf.WriteString(t.Vout)
+	bf.WriteString(d)
+	bf.WriteString(f)
+	bf.WriteString(t)
 	bt := bf.Bytes()
 	return utils.Hash(bt)
 }
